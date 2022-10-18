@@ -8,7 +8,9 @@ import { handleCancelMatch, handleDisconnect, handleMatch } from './controller/m
 const app = express();
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(cors()) // config cors so that front-end can use
+app.use(cors({
+  origin: ['http://localhost:3000'],
+})) // config cors so that front-end can use
 app.options('*', cors())
 
 const httpServer = createServer(app);
