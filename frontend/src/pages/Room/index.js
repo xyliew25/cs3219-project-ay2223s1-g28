@@ -16,8 +16,12 @@ import styles from './Room.module.css';
 import { URL_COMM_SVC } from '../../configs';
 import { URL_COLLAB_SVC } from '../../configs';
 
-const comm_socket = io(URL_COMM_SVC);
-const collab_socket = io(URL_COLLAB_SVC);
+const comm_socket = io(URL_COMM_SVC, {
+  path: '/api/communication-service',
+});
+const collab_socket = io(URL_COLLAB_SVC, {
+  path: '/api/collaboration-service',
+});
 
 function RoomPage() {
   const alertCtx = useContext(AlertContext);

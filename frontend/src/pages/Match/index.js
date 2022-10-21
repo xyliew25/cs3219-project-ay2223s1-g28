@@ -26,6 +26,10 @@ const PADDED_BTN = {
 const DURATION = 30; 
 
 function MatchPage() {
+  const socket = io(URL_MATCHING_SVC, {
+    path: '/api/matching-service',
+  });
+
   // Hooks
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,7 +37,6 @@ function MatchPage() {
   // Difficulty
   const [difficulty, setDifficulty] = useState('');
   // Socket
-  const [socket, setSocket] = useState(null);
   const [room, setRoom] = useState('');
   const [isMatchFailed, setIsMatchFailed] = useState(false);
   // Timer
@@ -51,9 +54,6 @@ function MatchPage() {
     }
   }, [location.state, alertCtx, navigate]);
   // Socket
-  useEffect(() => {
-    setSocket(io.connect(URL_MATCHING_SVC));
-  }, [])
   useEffect(() => {
     if (socket) {
       socket.on('matchSuccess', (room) => {

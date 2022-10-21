@@ -73,6 +73,16 @@ services:
     volumes:
       - redis-volume:/data
 
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      [frontend, user-service, matching-service, communication-service, collaboration-service, question-service]
+
 volumes:
   mongo-user-volume:
   mongo-question-volume:
